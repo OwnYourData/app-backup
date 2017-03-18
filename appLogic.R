@@ -91,9 +91,9 @@ output$backupList <- DT::renderDataTable({datatable({
                         as.numeric(data$timestamp), origin='1970-01-01'))
                 rownames(data) <- 1:nrow(data)
                 data <- data[, c('myDat', 'link'), drop = FALSE]
-                data$link <- lapply(data$link, function(x) {
+                data$link <- list(unlist(lapply(data$link, function(x) {
                         paste0('<a href="', x, '">', x, '</a>')
-                })
+                })))
                 colnames(data) <- c('Zeit', 'Link zum Download')
                 data
         } else {
